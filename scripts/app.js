@@ -71,7 +71,38 @@ class UI {
     }
 }
 // Store Class: Handles Storage
+class Store{
+    // Methods
+    static getBooks(){
+        let books;
+        if(localStorage.getItem('books') === null){
+            // if no books in storage
+            books = [];
+        } else {
+            books = JSON.parse(localStorage.getItem('books'));
+        }
+    }
 
+    static addBook(book){
+        const books = Store.getBooks();
+
+        books.push(book);
+        
+        localStorage.setItem('books', JSON.stringify(books));
+    }
+
+    static removeBook(isbn){
+        const books = Store.getBooks();
+
+        books.forEach((book, index) => {
+            if(books.isbn === isbn){
+                books.splice(index, 1);;
+            }
+        });
+
+        localStorage.setItem('books', JSON.stringify(books));      
+    }
+}
 // Event: Display Books
 document.addEventListener('DOMContentLoaded', UI.displayBooks);
 
