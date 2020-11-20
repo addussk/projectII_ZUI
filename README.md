@@ -3,7 +3,6 @@ Application sort of SPA(Single Page Application). The application should provide
 
 <!-- @@@@@@@@@@@@@@@@ TODO list @@@@@@@@@@@@@@@ -->
 <!-- Books Task -->
--Attributes: Name, Price, Description, Image(url adress to location in network) addition info :Pages/Published/Rating.
 
 <!-- List task -->
 -Create predefined list of object;
@@ -25,6 +24,7 @@ Application sort of SPA(Single Page Application). The application should provide
 -Created class defined book with attributes(below); 
 Attributes: Name, Price, Description, Image(url adress to location in network) addition info :Pages/Published/Rating.
 -Adapted UI methods to new attributes;
+-Implement functionality of adding image for each book and display image on the list
 
 
 

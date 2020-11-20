@@ -1,6 +1,6 @@
 // Book Class: Represents a Book
 class Book {
-    constructor(title, author, pages, published, rating, price, desc) {
+    constructor(title, author, pages, published, rating, price, desc, link) {
       this.title = title;
       this.author = author;
       this.pages = pages;
@@ -8,6 +8,7 @@ class Book {
       this.rating = rating;
       this.price = price;
       this.description = desc;
+      this.link = link;
     }
   }
   
@@ -42,6 +43,7 @@ class Book {
   
       // Change the HTML content of <tr>
       row.innerHTML = `
+        <td><img src='${book.link}'></td>
         <td>${book.title}</td>
         <td>${book.author}</td>
         <td>${book.pages}</td>
@@ -81,6 +83,7 @@ class Book {
       document.querySelector('#rating').value = '';
       document.querySelector('#price').value = '';
       document.querySelector('#description').value = '';
+      document.querySelector('#link').value = '';
     }
   }
   
@@ -134,13 +137,14 @@ class Book {
     const rating = document.querySelector('#rating').value;
     const price = document.querySelector('#price').value;
     const desc = document.querySelector('#description').value;
+    const link = document.querySelector('#link').value;
   
     // Validate
-    if(title === '' || author === '' || pages === '' || published === '' || rating === '' || price === '' || desc === ''){
+    if(title === '' || author === '' || pages === '' || published === '' || rating === '' || price === '' || desc === '' || link === ''){
       UI.showAlert('Please fill in all fields', 'danger');
     } else {
       // Instatiate book
-      const book = new Book(title, author, pages, published, rating, price, desc);
+      const book = new Book(title, author, pages, published, rating, price, desc, link);
   
       // Add Book to UI
       UI.addBookToList(book);

@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://bootswatch.com/4/yeti/bootstrap.min.css">
     <script src="https://kit.fontawesome.com/945b19f7e6.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles/style.css">
 
     <title>MyBookList App</title>
 </head>
@@ -42,11 +43,16 @@
             <label for="description">Description</label>
             <input type="text" id="description" class="form-control">
           </div>
+          <div class="form-group">
+              <label for class="link">Link do zdjecia</label>
+              <input type="url" name="link" id="link">
+          </div>
         <input type="submit" value="Add Book" class="btn btn-primary btn-block">
       </form>
       <table class="table table-striped mt-5">
         <thead>
           <tr>
+            <th></th>
             <th>Title</th>
             <th>Author</th>
             <th>Pages</th>
