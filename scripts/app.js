@@ -1,9 +1,13 @@
 // Book Class: Represents a Book
 class Book {
-    constructor(title, author, isbn) {
+    constructor(title, author, pages, published, rating, price, desc) {
       this.title = title;
       this.author = author;
-      this.isbn = isbn;
+      this.pages = pages;
+      this.published = published;
+      this.rating = rating;
+      this.price = price;
+      this.description = desc;
     }
   }
   
@@ -40,7 +44,11 @@ class Book {
       row.innerHTML = `
         <td>${book.title}</td>
         <td>${book.author}</td>
-        <td>${book.isbn}</td>
+        <td>${book.pages}</td>
+        <td>${book.published}</td>
+        <td>${book.rating}</td>
+        <td>${book.price}</td>
+        <td>${book.description}</td>
         <td><a href="#" class="btn btn-danger btn-sm delete">X</a></td>
       `;
   
@@ -68,7 +76,11 @@ class Book {
     static clearFields() {
       document.querySelector('#title').value = '';
       document.querySelector('#author').value = '';
-      document.querySelector('#isbn').value = '';
+      document.querySelector('#pages').value = '';
+      document.querySelector('#published').value = '';
+      document.querySelector('#rating').value = '';
+      document.querySelector('#price').value = '';
+      document.querySelector('#description').value = '';
     }
   }
   
@@ -93,11 +105,11 @@ class Book {
       localStorage.setItem('books', JSON.stringify(books));
     }
   
-    static removeBook(isbn){
+    static removeBook(pages){
       const books = Store.getBooks();
   
       books.forEach((book, index) => {
-        if(book.isbn === isbn){
+        if(book.pages === pages){
           books.splice(index, 1);
         }
       });
@@ -117,14 +129,18 @@ class Book {
     // Get form values
     const title = document.querySelector('#title').value;
     const author = document.querySelector('#author').value;
-    const isbn = document.querySelector('#isbn').value;
+    const pages = document.querySelector('#pages').value;
+    const published = document.querySelector('#published').value;
+    const rating = document.querySelector('#rating').value;
+    const price = document.querySelector('#price').value;
+    const desc = document.querySelector('#description').value;
   
     // Validate
-    if(title === '' || author === '' || isbn === ''){
+    if(title === '' || author === '' || pages === '' || published === '' || rating === '' || price === '' || desc === ''){
       UI.showAlert('Please fill in all fields', 'danger');
     } else {
       // Instatiate book
-      const book = new Book(title, author, isbn);
+      const book = new Book(title, author, pages, published, rating, price, desc);
   
       // Add Book to UI
       UI.addBookToList(book);

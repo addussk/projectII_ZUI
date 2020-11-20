@@ -2,9 +2,7 @@
 Application sort of SPA(Single Page Application). The application should provide ability to manage a predefined list of product.
 
 <!-- @@@@@@@@@@@@@@@@ TODO list @@@@@@@@@@@@@@@ -->
-
 <!-- Books Task -->
--Create class defined book with attributes; 
 -Attributes: Name, Price, Description, Image(url adress to location in network) addition info :Pages/Published/Rating.
 
 <!-- List task -->
@@ -16,14 +14,17 @@ Application sort of SPA(Single Page Application). The application should provide
 <!-- Store Task -->
 -Create store class with ability to add, edit, remove element from list;
 
-
-<!-- @@@@@@@@@@@@@@@@ DONE list @@@@@@@@@@@@@@@ -->
--Prepared base structure of Single Page Application to future development
--Prepared prototype of  local storage to keep data in browser memory.
-
-
 <!-- Technical Specifications -->
 - Use one of front-end framework of JavaScript for example : React, Vue, Angular
 - Use one of framework for layout  for example: Bootstrap
 - Node.js npm
+
+<!-- @@@@@@@@@@@@@@@@ DONE list @@@@@@@@@@@@@@@ -->
+-Prepared base structure of Single Page Application to future development
+-Prepared prototype of  local storage to keep data in browser memory.
+-Created class defined book with attributes(below); 
+Attributes: Name, Price, Description, Image(url adress to location in network) addition info :Pages/Published/Rating.
+-Adapted UI methods to new attributes;
+
+
 
