@@ -5,7 +5,7 @@ Application sort of SPA(Single Page Application). The application should provide
 
 <!-- Books Task -->
 -Create class defined book with attributes; 
--Attributes: Name, Price, Description, Image(url adress to location in network) and 3 additional.
+-Attributes: Name, Price, Description, Image(url adress to location in network) addition info :Pages/Published/Rating.
 
 <!-- List task -->
 -Create predefined list of object;
