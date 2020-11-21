@@ -2,3 +2,26 @@ img{
     max-width: 50px;
     max-height: 80px;
 }
+
+.table-sortable th{
+    cursor: pointer;
+    background-color: coral;
+}
+
+.table-sortable .th-sort-asc::after {
+    content: "\25b4";
+  }
+  
+  .table-sortable .th-sort-desc::after {
+    content: "\25be";
+  }
+
+.table-sortable .th-sort-asc::after,
+.table-sortable .th-sort-dec::after {
+    margin-left: 5px;
+}
+
+.table-sortable .th-sort-asc,
+.table-sortable .th-sort-desc {
+  background: rgba(0, 0, 0, 0.1);
+}
