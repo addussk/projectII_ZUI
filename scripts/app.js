@@ -78,22 +78,23 @@ class UI {
     // Change the HTML content of <tr>
     row.innerHTML = `
       <td><img src='${book.link}'></td>
-      <td>${book.title}</td>
-      <td>${book.author}</td>
-      <td>${book.pages}</td>
-      <td>${book.published}</td>
-      <td>${book.rating}</td>
-      <td>${book.price}</td>
-      <td>${book.description}</td>
-      <td><a href="#" class="btn btn-danger btn-sm delete">X</a></td>
+      <td class="text-center">${book.title}</td>
+      <td class="text-center">${book.author}</td>
+      <td class="text-center">${book.pages}</td>
+      <td class="text-center">${book.published}</td>
+      <td class="text-center">${book.rating}</td>
+      <td class="text-center">${book.price}</td>
+      <td class="text-center">${book.description}</td>
+      <td class="text-center"><span class="table-remove"><button type="button"
+      class="btn btn-danger btn-rounded btn-sm my-0 remove">Remove</button></span></td>
     `;
 
     list.appendChild(row);
   }
 
   static deleteBook(el) {
-    if(el.classList.contains('delete')) {
-      el.parentElement.parentElement.remove();
+    if(el.classList.contains('remove')) {
+      el.parentElement.parentElement.parentElement.remove();
     }
   }
 
@@ -261,7 +262,7 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
 
 // Event: Remove a Book
 document.querySelector('#book-list').addEventListener('click', (e) => {
-  // console.log(e);
+  // console.log(e.target);
   // Remove book from UI
   UI.deleteBook(e.target);
 
