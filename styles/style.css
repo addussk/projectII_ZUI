@@ -1,12 +1,56 @@
+body{
+}
+
+.container{
+    min-width: 1600px;
+}
+
 img{
     max-width: 50px;
     max-height: 80px;
 }
 
+.col25{
+    width: 40%;
+    float: left;
+    
+}
 
+.form-group{
+    float: left;
+    padding: 10px;
+}
+
+.form-group label{
+    font-size: 25px;
+    font-weight: 700;
+    padding: 10px;
+    margin-top: 5px;
+}
+
+.form-group input{
+    padding: 0px;
+    margin-top: 10px;
+    margin-left: 20px;
+    max-width: 200px;
+    max-height: 50px;
+    font-size: 30px;
+} 
+
+.col25 .btn{
+    font-size: 30px;
+    margin-left: 150px;
+}
 
 .filterOption{
     float: right;
+    font-weight: 900;
+}
+
+.filterOption .btn{
+    margin-right: 20px;
+    padding: 5px;
+    font-size: 20;
 }
 
 .sortBorder{
@@ -19,6 +63,7 @@ img{
     max-width: 80px;
     max-height: 25px;
     margin-left: 10px;
+    margin-top: 10px;
     float: right;
 }
 
@@ -27,6 +72,14 @@ img{
     /* padding: 10px 0px 0px 0px; */
 }​
 
+table th{
+    font-weight: 900;
+}
+
+#book-list{
+    font-weight: 500;
+    font-size: 25px;
+}
 
 thead{
     cursor: pointer;

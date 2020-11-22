@@ -16,22 +16,56 @@ class Book {
 class UI {
   // Method resposible for display list of books
   static displayBooks(){
-      // Dummy data
-      // const StoredBooks = [
-      //     {
-      //         title: 'Book One',
-      //         author: 'Author One',
-      //         isbn: '3434434',
-      //     },
-      //     {
-      //         title: 'Book Second',
-      //         author: 'Author Second',
-      //         isbn: '45545',
-      //     },
-      // ];
+    // predefined list
+    const PredefinedList = [
+      {
+        title: 'Book One',
+        author: 'Author One',
+        pages: '100',
+        published: '1990',
+        rating: '5',
+        price: '30',
+        description: 'None',
+        link: 'https://www.gravatar.com/avatar/69cf2e00c81bc89731652db2b9ca1dbf?s=32&d=identicon&r=PG&f=1',
+      },
+      {
+        title: 'Book Two',
+        author: 'Author Two',
+        pages: '300',
+        published: '1992',
+        rating: '6',
+        price: '32',
+        description: 'None',
+        link: 'https://www.gravatar.com/avatar/69cf2e00c81bc89731652db2b9ca1dbf?s=32&d=identicon&r=PG&f=1',
+      },
+      {
+        title: 'Book Three',
+        author: 'Author Three',
+        pages: '400',
+        published: '1995',
+        rating: '1',
+        price: '111',
+        description: 'None',
+        link: 'https://www.gravatar.com/avatar/69cf2e00c81bc89731652db2b9ca1dbf?s=32&d=identicon&r=PG&f=1',
+      },
+      {
+        title: 'Book Four',
+        author: 'Author Four',
+        pages: '660',
+        published: '2020',
+        rating: '4',
+        price: '32',
+        description: 'None',
+        link: 'https://www.gravatar.com/avatar/69cf2e00c81bc89731652db2b9ca1dbf?s=32&d=identicon&r=PG&f=1',
+      },
+
+    ];
+
     const books = Store.getBooks();
+    const suma = PredefinedList.concat(books);
+
     // We passing each book from local stored to method added book to list
-    books.forEach((book) => UI.addBookToList(book));
+    suma.forEach((book) => UI.addBookToList(book));
   }
 
   static addBookToList(book){
