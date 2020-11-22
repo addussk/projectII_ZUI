@@ -2,7 +2,7 @@ body{
 }
 
 .container{
-    min-width: 1600px;
+    min-width: 1600px;  
 }
 
 img{
@@ -12,8 +12,15 @@ img{
 
 .col25{
     width: 40%;
-    float: left;
-    
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 100px;
+}
+
+.col25 .btn{
+    font-size: 30px;
+    margin-left: 150px;
+    margin-bottom: 50px;
 }
 
 .form-group{
@@ -36,11 +43,6 @@ img{
     max-height: 50px;
     font-size: 30px;
 } 
-
-.col25 .btn{
-    font-size: 30px;
-    margin-left: 150px;
-}
 
 .filterOption{
     float: right;
