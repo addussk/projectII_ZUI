@@ -13,6 +13,9 @@ Application sort of SPA(Single Page Application). The application should provide
 <!-- Store Task -->
 -Create store class with ability to add, edit, remove element from list;
 
+<!-- UI -->
+-Refactor showAlert function to show msg in diffrent place
+-Mechanism to remove filtr option
 <!-- Technical Specifications -->
 - Use one of front-end framework of JavaScript for example : React, Vue, Angular
 - Use one of framework for layout  for example: Bootstrap

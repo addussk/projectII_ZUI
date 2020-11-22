@@ -3,7 +3,32 @@ img{
     max-height: 80px;
 }
 
-.table-sortable th{
+
+
+.filterOption{
+    float: right;
+}
+
+.sortBorder{
+    margin-right: 10px;
+    text-align: center;
+    display: inline-block;
+}
+
+.sortBorder input{
+    max-width: 80px;
+    max-height: 25px;
+    margin-left: 10px;
+    float: right;
+}
+
+.sortBorder label {
+    width: 30px;
+    /* padding: 10px 0px 0px 0px; */
+}​
+
+
+thead{
     cursor: pointer;
     background-color: coral;
 }
