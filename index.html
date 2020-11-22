@@ -17,39 +17,39 @@
 <div class="container mt-4">
     <h1 class="display-4 text-center">
       <i class="fas fa-book-open text-primary"></i> My<span class="text-primary">Book</span>List</h1>
-      <form id="book-form">
-        <div class="form-group">
+      <form id="book-form" class="">
+        <div class="form-group d-flex flex-row">
           <label for="title">Title</label>
           <input type="text" id="title" class="form-control">
         </div>
-        <div class="form-group">
+        <div class="form-group d-flex flex-row">
           <label for="author">Author</label>
           <input type="text" id="author" class="form-control">
         </div>
-        <div class="form-group">
+        <div class="form-group d-flex flex-row">
             <label for="pages">Pages</label>
-            <input type="text" id="pages" class="form-control">
+            <input type="number" min="0" id="pages" class="form-control">
         </div>
-        <div class="form-group">
+        <div class="form-group d-flex flex-row">
           <label for="published">Published</label>
-          <input type="text" id="published" class="form-control">
+          <input type="number" min="0" id="published" class="form-control">
         </div>
-        <div class="form-group">
-            <label for="rating">Rating</label>
-            <input type="text" id="rating" class="form-control">
-          </div>
-          <div class="form-group">
-            <label for="price">Price</label>
-            <input type="text" id="price" class="form-control">
-          </div>
-          <div class="form-group">
-            <label for="description">Description</label>
-            <input type="text" id="description" class="form-control">
-          </div>
-          <div class="form-group">
-              <label for class="link">Link do zdjecia</label>
-              <input type="url" name="link" id="link">
-          </div>
+        <div class="form-group d-flex flex-row">
+          <label for="rating">Rating</label>
+          <input type="number" min="0" id="rating" class="form-control">
+        </div>
+        <div class="form-group d-flex flex-row">
+          <label for="price">Price</label>
+          <input type="number" min="0" id="price" class="form-control">
+        </div>
+        <div class="form-group d-flex flex-row">
+          <label for="description">Description</label>
+          <input type="text" id="description" class="form-control">
+        </div>
+        <div class="form-group d-flex flex-row">
+            <label for class="link">Link do zdjecia</label>
+            <input type="url" name="link" id="link">
+        </div>
         <input type="submit" value="Add Book" class="btn btn-primary btn-block">
       </form>
       <div class="filterOption mb-5 mt-5 ">
