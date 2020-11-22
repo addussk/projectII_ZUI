@@ -1,3 +1,5 @@
+var msg_location = { msg_loc_add_form:0, msg_loc_sort:1 };
+
 // Book Class: Represents a Book
 class Book {
   constructor(title, author, pages, published, rating, price, desc, link) {
@@ -163,16 +165,30 @@ class UI {
     }
   }
 
-  static showAlert(msg, className) {
+  static showAlert(msg, className, place) {
     const div = document.createElement('div');
     div.className = `alert alert-${className}`;
+    div.style.width = "350px";
+    div.style.height = "60px";
+    div.style.marginLeft = "auto";
+    div.style.marginRight = "auto";
+    div.style.fontSize = '20px';
     div.appendChild(document.createTextNode(msg));
     const container = document.querySelector('.container');
-    const form = document.querySelector('#book-form');
-    container.insertBefore(div, form);
+    
+    if(place === msg_location['msg_loc_add_form']){
+      const form = document.querySelector('#formLay');
+      container.insertBefore(div, form);
+
+    } else if (place === msg_location['msg_loc_sort']){
+      const form = document.querySelector('.table');
+      container.insertBefore(div, form);
+    } else {
+      // Invalid location
+    }
 
     // Vanish in 3 seconds
-    setTimeout(() => document.querySelector('.alert').remove(), 3000);
+    setTimeout(() => document.querySelector('.alert').remove(), 4000);
   }
 
   static clearFields() {
@@ -241,7 +257,7 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
 
   // Validate
   if(title === '' || author === '' || pages === '' || published === '' || rating === '' || price === '' || desc === '' || link === ''){
-    UI.showAlert('Please fill in all fields', 'danger');
+    UI.showAlert('Please fill in all fields', 'danger', msg_location['msg_loc_add_form']);
   } else {
     // Instatiate book
     const book = new Book(title, author, pages, published, rating, price, desc, link);
@@ -253,7 +269,7 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
     Store.addBook(book);
 
     // Show success message
-    UI.showAlert('Book Added', 'success');
+    UI.showAlert('Book Added', 'success', msg_location['msg_loc_add_form']);
 
     // Clear fields
     UI.clearFields();
@@ -267,10 +283,10 @@ document.querySelector('#book-list').addEventListener('click', (e) => {
   UI.deleteBook(e.target);
 
   // Remove book from store
-  Store.removeBook(e.target.parentElement.previousElementSibling.textContent);
+  Store.removeBook(e.target.parentElement.parentElement.previousElementSibling.textContent);
 
   // Show success message
-  UI.showAlert('Book Removed', 'success');
+  UI.showAlert('Book Removed', 'success', msg_location['msg_loc_sort']);
 });
 
 // Event: Sort a List
