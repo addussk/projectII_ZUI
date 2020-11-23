@@ -5,17 +5,14 @@ Application sort of SPA(Single Page Application). The application should provide
 <!-- Books Task -->
 
 <!-- List task -->
--Create predefined list of object;
--Create initialization list with some products; Product should be render use created directive or component
--Add filter mechanism by price include scope 'from' and 'to'.
 -Disable column  which shouldn't be filtred
 
 <!-- Store Task -->
 -Create store class with ability to add, edit, remove element from list;
 
 <!-- UI -->
--Refactor showAlert function to show msg in diffrent place
 -Mechanism to remove filtr option
+
 <!-- Technical Specifications -->
 - Use one of front-end framework of JavaScript for example : React, Vue, Angular
 - Use one of framework for layout  for example: Bootstrap
@@ -29,6 +26,9 @@ Attributes: Name, Price, Description, Image(url adress to location in network) a
 -Adapted UI methods to new attributes.
 -Implemented functionality of adding image for each book and display image on the list.
 -Implemented sorting mechanism by every attributes, just clicked in header for each column.
+-Refactored showAlert function to show msg in diffrent place
+-Created predefined list of object;
+-Create initialization list with some products; Product should be render use created directive or component
 
 
 
