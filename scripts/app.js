@@ -224,11 +224,11 @@ class Store{
     localStorage.setItem('books', JSON.stringify(books));
   }
 
-  static removeBook(pages){
+  static removeBook(title, author){
     const books = Store.getBooks();
-
+    
     books.forEach((book, index) => {
-      if(book.pages === pages){
+      if( book.title === title && book.author === author ){
         books.splice(index, 1);
       }
     });
@@ -278,15 +278,19 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
 
 // Event: Remove a Book
 document.querySelector('#book-list').addEventListener('click', (e) => {
-  // console.log(e.target);
-  // Remove book from UI
-  UI.deleteBook(e.target);
 
-  // Remove book from store
-  Store.removeBook(e.target.parentElement.parentElement.previousElementSibling.textContent);
+  if( e.target.textContent === 'Remove'){
+    // Remove book from UI
+    UI.deleteBook(e.target);
 
-  // Show success message
-  UI.showAlert('Book Removed', 'success', msg_location['msg_loc_sort']);
+    // Remove book from store
+    var temp_title = e.target.parentElement.parentElement.parentElement.firstChild.nextElementSibling.nextElementSibling.textContent;
+    var temp_author = e.target.parentElement.parentElement.parentElement.firstChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
+    Store.removeBook( temp_title, temp_author );
+
+    // Show success message
+    UI.showAlert('Book Removed', 'success', msg_location['msg_loc_sort']);
+  }
 });
 
 // Event: Sort a List
