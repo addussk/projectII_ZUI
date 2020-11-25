@@ -1,5 +1,50 @@
 var msg_location = { msg_loc_add_form:0, msg_loc_sort:1 };
 
+// Predefined list with books initialize at the beginning
+const PredefinedList = [
+  {
+    title: 'Book One',
+    author: 'Author One',
+    pages: '100',
+    published: '1990',
+    rating: '5',
+    price: '30',
+    description: 'None',
+    link: 'https://www.gravatar.com/avatar/69cf2e00c81bc89731652db2b9ca1dbf?s=32&d=identicon&r=PG&f=1',
+  },
+  {
+    title: 'Book Two',
+    author: 'Author Two',
+    pages: '300',
+    published: '1992',
+    rating: '6',
+    price: '32',
+    description: 'None',
+    link: 'https://www.gravatar.com/avatar/69cf2e00c81bc89731652db2b9ca1dbf?s=32&d=identicon&r=PG&f=1',
+  },
+  {
+    title: 'Book Three',
+    author: 'Author Three',
+    pages: '400',
+    published: '1995',
+    rating: '1',
+    price: '111',
+    description: 'None',
+    link: 'https://www.gravatar.com/avatar/69cf2e00c81bc89731652db2b9ca1dbf?s=32&d=identicon&r=PG&f=1',
+  },
+  {
+    title: 'Book Four',
+    author: 'Author Four',
+    pages: '660',
+    published: '2020',
+    rating: '4',
+    price: '32',
+    description: 'None',
+    link: 'https://www.gravatar.com/avatar/69cf2e00c81bc89731652db2b9ca1dbf?s=32&d=identicon&r=PG&f=1',
+  },
+
+];
+
 // Book Class: Represents a Book
 class Book {
   constructor(title, author, pages, published, rating, price, desc, link) {
@@ -18,56 +63,11 @@ class Book {
 class UI {
   // Method resposible for display list of books
   static displayBooks(){
-    // predefined list
-    const PredefinedList = [
-      {
-        title: 'Book One',
-        author: 'Author One',
-        pages: '100',
-        published: '1990',
-        rating: '5',
-        price: '30',
-        description: 'None',
-        link: 'https://www.gravatar.com/avatar/69cf2e00c81bc89731652db2b9ca1dbf?s=32&d=identicon&r=PG&f=1',
-      },
-      {
-        title: 'Book Two',
-        author: 'Author Two',
-        pages: '300',
-        published: '1992',
-        rating: '6',
-        price: '32',
-        description: 'None',
-        link: 'https://www.gravatar.com/avatar/69cf2e00c81bc89731652db2b9ca1dbf?s=32&d=identicon&r=PG&f=1',
-      },
-      {
-        title: 'Book Three',
-        author: 'Author Three',
-        pages: '400',
-        published: '1995',
-        rating: '1',
-        price: '111',
-        description: 'None',
-        link: 'https://www.gravatar.com/avatar/69cf2e00c81bc89731652db2b9ca1dbf?s=32&d=identicon&r=PG&f=1',
-      },
-      {
-        title: 'Book Four',
-        author: 'Author Four',
-        pages: '660',
-        published: '2020',
-        rating: '4',
-        price: '32',
-        description: 'None',
-        link: 'https://www.gravatar.com/avatar/69cf2e00c81bc89731652db2b9ca1dbf?s=32&d=identicon&r=PG&f=1',
-      },
-
-    ];
 
     const books = Store.getBooks();
-    const suma = PredefinedList.concat(books);
 
     // We passing each book from local stored to method added book to list
-    suma.forEach((book) => UI.addBookToList(book));
+    books.forEach((book) => UI.addBookToList(book));
   }
 
   static addBookToList(book){
@@ -76,10 +76,12 @@ class UI {
 
     // Create a <tr> element in document 
     const row = document.createElement('tr');
+    row.className += 'changeableTab';
+    row.setAttribute('contenteditable', 'true');
 
     // Change the HTML content of <tr>
     row.innerHTML = `
-      <td><img src='${book.link}'></td>
+      <td contenteditable='false' ><img src='${book.link}'></td>
       <td class="text-center">${book.title}</td>
       <td class="text-center">${book.author}</td>
       <td class="text-center">${book.pages}</td>
@@ -87,8 +89,10 @@ class UI {
       <td class="text-center">${book.rating}</td>
       <td class="text-center">${book.price}</td>
       <td class="text-center">${book.description}</td>
-      <td class="text-center"><span class="table-remove"><button type="button"
+      <td contenteditable='false' class="text-center"><span class="table-remove"><button type="button"
       class="btn btn-danger btn-rounded btn-sm my-0 remove">Remove</button></span></td>
+      <td contenteditable='false' class="text-center"><span class="table-save"><button type="button"
+      class="btn btn-success btn-rounded btn-sm my-0 remove">Save</button></span></td>
     `;
 
     list.appendChild(row);
@@ -100,13 +104,13 @@ class UI {
     }
   }
 
-  /**
- * Sorts a HTML table.
- * 
- * @param {HTMLTableElement} table The table to sort 
- * @param {number} column The index of the column to sort 
- * @param {boolean} asc  Determines if the sorting will be in ascending
-*/
+    /**
+   * Sorts a HTML table.
+   * 
+   * @param {HTMLTableElement} table The table to sort 
+   * @param {number} column The index of the column to sort 
+   * @param {boolean} asc  Determines if the sorting will be in ascending
+  */
   static sortTableByColumn(table, column, asc = true){
     const dirModifier = asc ? 1 : -1;
     const tBody = table.tBodies[0];
@@ -238,7 +242,17 @@ class Store{
 }
 
 // Event: Display Books
-document.addEventListener('DOMContentLoaded', UI.displayBooks);
+document.addEventListener('DOMContentLoaded', () => {
+
+  var firstTime = localStorage.getItem("first_time");
+  if(!firstTime) {
+      // first time loaded!
+      localStorage.setItem("first_time","1");
+      PredefinedList.forEach((book) => Store.addBook(book));
+  }
+
+  UI.displayBooks();
+});
 
 // Event: Add a Book
 document.querySelector('#book-form').addEventListener('submit', (e) => {
@@ -337,14 +351,56 @@ document.querySelector('.dropdown').addEventListener('click', (e) => {
         
       } else{
         //  Upper border has to be bigger than lower
-        UI.showAlert('Upper border has to be bigger than lower', 'danger');
+        // UI.showAlert('Upper border has to be bigger than lower', 'danger');
       }
     } else {
       // Form cannot be empty!
-      UI.showAlert('Please fill boths border', 'danger');
+      // UI.showAlert('Please fill boths border', 'danger');
     }
   } else {
     // Invalid parameter
   }
 });
 
+// Event: Edit a Book attributes
+document.querySelector('#book-list').addEventListener('click', (e) => {
+
+  if( e.target.textContent === 'Save'){
+    // Remove book from store
+    localStorage.clear();
+
+    // Add new content of table to local store
+    num_col = 10;
+    var table = document.querySelector("table");
+    var tBody = table.tBodies[0];
+    var tr = tBody.querySelectorAll("tr");
+    num_row = tr.length;
+
+    for (i = 0; i < num_row; i++) {
+      // Get values from table
+      const link = tr[i].getElementsByTagName("td")[0].firstChild.src;
+      const title = tr[i].getElementsByTagName("td")[1].textContent;
+      const author = tr[i].getElementsByTagName("td")[2].textContent;
+      const pages = tr[i].getElementsByTagName("td")[3].textContent;
+      const published = tr[i].getElementsByTagName("td")[4].textContent;
+      const rating = tr[i].getElementsByTagName("td")[5].textContent;
+      const price = tr[i].getElementsByTagName("td")[6].textContent;
+      const desc = tr[i].getElementsByTagName("td")[7].textContent;
+
+      // Validate
+      if(title === '' || author === '' || pages === '' || published === '' || rating === '' || price === '' || desc === ''){
+        UI.showAlert('You cannot left empty space', 'danger', msg_location['msg_loc_sort']);
+      } else {
+        // Instatiate book
+        const book = new Book(title, author, pages, published, rating, price, desc, link);
+
+        // Add book to store
+        Store.addBook(book);
+
+        localStorage.setItem("first_time","1");
+      }
+    }
+    // Show success message
+    UI.showAlert('Book Edited', 'success', msg_location['msg_loc_sort']);
+  }
+});

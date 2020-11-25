@@ -6,12 +6,14 @@ Application sort of SPA(Single Page Application). The application should provide
 
 <!-- List task -->
 -Disable column  which shouldn't be filtred
-
+-Fix sorting of number that 111 should be bigger than 20
+-Create mechanism to abort put letter into number column
 <!-- Store Task -->
--Create store class with ability to add, edit, remove element from list;
 
 <!-- UI -->
 -Mechanism to remove filtr option
+-Max size for td element in table
+-Possibility to zoom image
 
 <!-- Technical Specifications -->
 - Use one of front-end framework of JavaScript for example : React, Vue, Angular
@@ -26,9 +28,10 @@ Attributes: Name, Price, Description, Image(url adress to location in network) a
 -Adapted UI methods to new attributes.
 -Implemented functionality of adding image for each book and display image on the list.
 -Implemented sorting mechanism by every attributes, just clicked in header for each column.
--Refactored showAlert function to show msg in diffrent place
+-Refactored showAlert function to show msg in diffrent place.
 -Created predefined list of object;
--Create initialization list with some products; Product should be render use created directive or component
-
+-Created store class with ability to add, edit, remove element from list;
+-Created initialization list with some products; Product should be render use created directive or component
+-Added predefined list to local storage at the first loading application
 
 
