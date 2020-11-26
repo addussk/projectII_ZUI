@@ -5,7 +5,7 @@ Application sort of SPA(Single Page Application). The application should provide
 <!-- Books Task -->
 
 <!-- List task -->
--Disable column  which shouldn't be filtred
+
 -Fix sorting of number that 111 should be bigger than 20
 -Create mechanism to abort put letter into number column
 <!-- Store Task -->
@@ -33,5 +33,6 @@ Attributes: Name, Price, Description, Image(url adress to location in network) a
 -Created store class with ability to add, edit, remove element from list;
 -Created initialization list with some products; Product should be render use created directive or component
 -Added predefined list to local storage at the first loading application
+-Disabled column  which shouldn't be sorted
 
 

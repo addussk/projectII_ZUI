@@ -309,12 +309,16 @@ document.querySelector('#book-list').addEventListener('click', (e) => {
 
 // Event: Sort a List
 document.querySelectorAll(".table-sortable th").forEach(headerCell => {
-  headerCell.addEventListener("click", () => {
-      const tableElement = headerCell.parentElement.parentElement.parentElement;
-      const headerIndex = Array.prototype.indexOf.call(headerCell.parentElement.children, headerCell);
-      const currentIsAscending = headerCell.classList.contains("th-sort-asc");
+  headerCell.addEventListener("click", (e) => {
+      if(e.target.className === 'no-sort text-center'){
+        // do nothing 
+      } else {
+        const tableElement = headerCell.parentElement.parentElement.parentElement;
+        const headerIndex = Array.prototype.indexOf.call(headerCell.parentElement.children, headerCell);
+        const currentIsAscending = headerCell.classList.contains("th-sort-asc");
 
-      UI.sortTableByColumn(tableElement, headerIndex, !currentIsAscending);
+        UI.sortTableByColumn(tableElement, headerIndex, !currentIsAscending);
+      }
   });
 });
 
