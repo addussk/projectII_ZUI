@@ -5,14 +5,11 @@ Application sort of SPA(Single Page Application). The application should provide
 <!-- Books Task -->
 
 <!-- List task -->
-
 -Fix sorting of number that 111 should be bigger than 20
--Create mechanism to abort put letter into number column
 <!-- Store Task -->
 
 <!-- UI -->
 -Mechanism to remove filtr option
--Max size for td element in table
 -Possibility to zoom image
 
 <!-- Technical Specifications -->
@@ -33,6 +30,8 @@ Attributes: Name, Price, Description, Image(url adress to location in network) a
 -Created store class with ability to add, edit, remove element from list;
 -Created initialization list with some products; Product should be render use created directive or component
 -Added predefined list to local storage at the first loading application
--Disabled column  which shouldn't be sorted
+-Disabled column  which shouldn't be sorted.
+-Adapted max size for td element in table.
+-Created mechanism to abort put letter into number column during edition process
 
 

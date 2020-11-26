@@ -1,4 +1,5 @@
 var msg_location = { msg_loc_add_form:0, msg_loc_sort:1 };
+const colNumberPosition = { pagePos: 3, publPos: 4, ratingPos: 5, pricePos: 6 };
 
 // Predefined list with books initialize at the beginning
 const PredefinedList = [
@@ -82,8 +83,8 @@ class UI {
     // Change the HTML content of <tr>
     row.innerHTML = `
       <td contenteditable='false' ><img src='${book.link}'></td>
-      <td class="text-center">${book.title}</td>
-      <td class="text-center">${book.author}</td>
+      <td style="max-width: 150px;" class="text-center">${book.title}</td>
+      <td style="max-width: 150px;" class="text-center">${book.author}</td>
       <td class="text-center">${book.pages}</td>
       <td class="text-center">${book.published}</td>
       <td class="text-center">${book.rating}</td>
@@ -104,13 +105,6 @@ class UI {
     }
   }
 
-    /**
-   * Sorts a HTML table.
-   * 
-   * @param {HTMLTableElement} table The table to sort 
-   * @param {number} column The index of the column to sort 
-   * @param {boolean} asc  Determines if the sorting will be in ascending
-  */
   static sortTableByColumn(table, column, asc = true){
     const dirModifier = asc ? 1 : -1;
     const tBody = table.tBodies[0];
@@ -192,7 +186,7 @@ class UI {
     }
 
     // Vanish in 3 seconds
-    setTimeout(() => document.querySelector('.alert').remove(), 4000);
+    setTimeout(() => document.querySelector('.alert').remove(), 3000);
   }
 
   static clearFields() {
@@ -204,6 +198,44 @@ class UI {
     document.querySelector('#price').value = '';
     document.querySelector('#description').value = '';
     document.querySelector('#link').value = '';
+  }
+
+  static isColContainNum(rowsToCheck, colInRow){
+    var len = rowsToCheck.length;
+    var errorCounter = 0;
+    var retVal = false;
+    
+    for(let i = 0; i < num_row; i++){
+      if(/^\d+$/.test(rowsToCheck[i].getElementsByTagName("td")[colInRow].textContent)){
+      } else {
+        // tab contains something else
+        errorCounter++
+      }    
+    };
+
+    if(errorCounter){
+      return false;
+    } else {
+      return true;
+    }
+  }
+  
+  static isEmptyAnyElem(rowsToCheck){
+    let emptyCells = 0;
+    for(let i = 0; i < rowsToCheck.length; i++){
+      for(let j = 1; j < rowsToCheck[i].cells.length; j++){
+        if(rowsToCheck[i].getElementsByTagName("td")[j].textContent){
+        } else {
+          emptyCells++
+        }
+      }
+    }
+
+    if(emptyCells){
+      return true;
+    } else {
+      return false;
+    }
   }
 }
 
@@ -370,31 +402,42 @@ document.querySelector('.dropdown').addEventListener('click', (e) => {
 document.querySelector('#book-list').addEventListener('click', (e) => {
 
   if( e.target.textContent === 'Save'){
-    // Remove book from store
-    localStorage.clear();
-
     // Add new content of table to local store
     num_col = 10;
     var table = document.querySelector("table");
     var tBody = table.tBodies[0];
     var tr = tBody.querySelectorAll("tr");
+    var errorCounter = 0;
+    var emptyError = false;
     num_row = tr.length;
 
-    for (i = 0; i < num_row; i++) {
-      // Get values from table
-      const link = tr[i].getElementsByTagName("td")[0].firstChild.src;
-      const title = tr[i].getElementsByTagName("td")[1].textContent;
-      const author = tr[i].getElementsByTagName("td")[2].textContent;
-      const pages = tr[i].getElementsByTagName("td")[3].textContent;
-      const published = tr[i].getElementsByTagName("td")[4].textContent;
-      const rating = tr[i].getElementsByTagName("td")[5].textContent;
-      const price = tr[i].getElementsByTagName("td")[6].textContent;
-      const desc = tr[i].getElementsByTagName("td")[7].textContent;
+    // Validate 
+    for (var key in colNumberPosition) {
+      if(!UI.isColContainNum(tr, colNumberPosition[key])){
+        errorCounter++;
+      }
+    }
 
-      // Validate
-      if(title === '' || author === '' || pages === '' || published === '' || rating === '' || price === '' || desc === ''){
-        UI.showAlert('You cannot left empty space', 'danger', msg_location['msg_loc_sort']);
-      } else {
+    if(UI.isEmptyAnyElem(tr)){
+      emptyError = true;
+    }
+
+    if(!errorCounter && !emptyError){
+      // Remove book from store
+      localStorage.clear();
+
+      for (i = 0; i < num_row; i++) {
+
+        // Get values from table
+        const link = tr[i].getElementsByTagName("td")[0].firstChild.src;
+        const title = tr[i].getElementsByTagName("td")[1].textContent;
+        const author = tr[i].getElementsByTagName("td")[2].textContent;
+        const pages = tr[i].getElementsByTagName("td")[3].textContent;
+        const published = tr[i].getElementsByTagName("td")[4].textContent;
+        const rating = tr[i].getElementsByTagName("td")[5].textContent;
+        const price = tr[i].getElementsByTagName("td")[6].textContent;
+        const desc = tr[i].getElementsByTagName("td")[7].textContent;
+          
         // Instatiate book
         const book = new Book(title, author, pages, published, rating, price, desc, link);
 
@@ -404,7 +447,19 @@ document.querySelector('#book-list').addEventListener('click', (e) => {
         localStorage.setItem("first_time","1");
       }
     }
-    // Show success message
-    UI.showAlert('Book Edited', 'success', msg_location['msg_loc_sort']);
+    else{
+      if(emptyError){
+        UI.showAlert('You cannot left empty space', 'danger', msg_location['msg_loc_sort']);
+      } else if(errorCounter) {
+        UI.showAlert('You only put number here!', 'danger', msg_location['msg_loc_sort']);
+      } else {
+        UI.showAlert('Undefined error!', 'danger', msg_location['msg_loc_sort']);
+      }
+    }
+
+    if(!errorCounter && !emptyError){
+      // Show success message
+      UI.showAlert('Book Edited', 'success', msg_location['msg_loc_sort']);
+    }
   }
 });
