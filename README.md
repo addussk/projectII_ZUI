@@ -5,12 +5,11 @@ Application sort of SPA(Single Page Application). The application should provide
 <!-- Books Task -->
 
 <!-- List task -->
--Fix sorting of number that 111 should be bigger than 20
+
 <!-- Store Task -->
 
 <!-- UI -->
 -Mechanism to remove filtr option
--Possibility to zoom image
 
 <!-- Technical Specifications -->
 - Use one of front-end framework of JavaScript for example : React, Vue, Angular
@@ -33,5 +32,6 @@ Attributes: Name, Price, Description, Image(url adress to location in network) a
 -Disabled column  which shouldn't be sorted.
 -Adapted max size for td element in table.
 -Created mechanism to abort put letter into number column during edition process
+-Fixed sorting mechanism for cells include numbers for example 111 should be bigger than 20
 
 

@@ -1,6 +1,10 @@
 var msg_location = { msg_loc_add_form:0, msg_loc_sort:1 };
 const colNumberPosition = { pagePos: 3, publPos: 4, ratingPos: 5, pricePos: 6 };
 
+function isANumber(str){
+  return !/\D/.test(str);
+}
+
 // Predefined list with books initialize at the beginning
 const PredefinedList = [
   {
@@ -106,26 +110,39 @@ class UI {
   }
 
   static sortTableByColumn(table, column, asc = true){
+    
     const dirModifier = asc ? 1 : -1;
     const tBody = table.tBodies[0];
-    const rows = Array.from(tBody.querySelectorAll("tr"));
-    // console.log(rows);
-
-    const sortedRows = rows.sort((a,b) => {
+    var rows = Array.from(tBody.querySelectorAll("tr"));
+    var direcSort = table.querySelector(`th:nth-child(${ column + 1})`).classList.contains('th-sort-asc');
+  
+    rows = rows.sort((a,b) => {    
       const aColText = a.querySelector(`td:nth-child(${ column + 1})`).textContent.trim();
       const bColText = b.querySelector(`td:nth-child(${ column + 1})`).textContent.trim();
 
-      return aColText > bColText ? (1 * dirModifier) : (-1 * dirModifier)
+      if(isANumber(a.querySelector(`td:nth-child(${ column + 1})`).textContent)){
+        // number sorting
+        if(direcSort){
+          // desc
+          return  bColText - aColText ;
+        } else {
+          // isc
+          return  aColText - bColText ;
+        }
+      } else {
+        // alphanumeric sorting
+        return aColText > bColText ? (1 * dirModifier) : (-1 * dirModifier);
+      }
+        
     });
 
-    // console.log(sortedRows)
     // Remove all existing TRs from the table
     while(tBody.firstChild){
       tBody.removeChild(tBody.firstChild);
-  }
+    }
 
   // Re-add the newly 
-  tBody.append(...sortedRows);
+  tBody.append(...rows);
 
   // Remember how the column is currently sorted
   table.querySelectorAll("th").forEach(th => th.classList.remove("th-sort-asc", "th-sort-desc"));
@@ -344,7 +361,7 @@ document.querySelectorAll(".table-sortable th").forEach(headerCell => {
         const tableElement = headerCell.parentElement.parentElement.parentElement;
         const headerIndex = Array.prototype.indexOf.call(headerCell.parentElement.children, headerCell);
         const currentIsAscending = headerCell.classList.contains("th-sort-asc");
-
+        // console.log(headerCell); classa zmienia sie poprawnie
         UI.sortTableByColumn(tableElement, headerIndex, !currentIsAscending);
       }
   });
