@@ -1,0 +1,23 @@
+{
+  "name": "projectii_zui",
+  "version": "1.0.0",
+  "description": "Application sort of SPA(Single Page Application). The application should provide ability to manage a predefined list of product.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/addussk/projectII_ZUI.git"
+  },
+  "author": "ak",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/addussk/projectII_ZUI/issues"
+  },
+  "homepage": "https://github.com/addussk/projectII_ZUI#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
