@@ -110,11 +110,7 @@ class UI {
     const tBody = table.tBodies[0];
     const rows = Array.from(tBody.querySelectorAll("tr"));
     // console.log(rows);
-    
-    /** Sort each row
-     * The trim() method removes whitespace from both ends of a string. 
-     * 
-     */
+
     const sortedRows = rows.sort((a,b) => {
       const aColText = a.querySelector(`td:nth-child(${ column + 1})`).textContent.trim();
       const bColText = b.querySelector(`td:nth-child(${ column + 1})`).textContent.trim();
