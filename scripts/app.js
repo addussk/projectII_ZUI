@@ -150,7 +150,7 @@ class UI {
   table.querySelector(`th:nth-child(${ column + 1})`).classList.toggle("th-sort-desc", !asc);
 }
 
-  static filtrTableByColumn(column, lborder, hborder) {
+  static filtrTableByColumn(column, lborder = 0, hborder) {
     var  filterLow, filterHigh, table, tBody, tr, td, i, tdValue;
 
     filterLow = lborder;
@@ -214,11 +214,9 @@ class UI {
   }
 
   static isColContainNum(rowsToCheck, colInRow){
-    var len = rowsToCheck.length;
     var errorCounter = 0;
-    var retVal = false;
     
-    for(let i = 0; i < num_row; i++){
+    for(let i = 0; i < rowsToCheck.length; i++){
       if(/^\d+$/.test(rowsToCheck[i].getElementsByTagName("td")[colInRow].textContent)){
       } else {
         // tab contains something else
@@ -422,7 +420,7 @@ document.querySelector('#book-list').addEventListener('click', (e) => {
     var tr = tBody.querySelectorAll("tr");
     var errorCounter = 0;
     var emptyError = false;
-    num_row = tr.length;
+    var num_row = tr.length;
 
     // Validate 
     for (var key in colNumberPosition) {
